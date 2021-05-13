@@ -8,85 +8,17 @@
     <artifactId>simple-web-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <packaging>war</packaging>
+    <modules>
+        <module>smart-web-framework</module>
+        <module>smart-samples</module>
+    </modules>
+
+    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-    <dependencies>
-        <!-- Servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- JSP -->
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- JSTL -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.25</version>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.21</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.10</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
-        </dependency>
-
-        <!-- 数据库操作工具类 -->
-        <dependency>
-            <groupId>commons-dbutils</groupId>
-            <artifactId>commons-dbutils</artifactId>
-            <version>1.7</version>
-        </dependency>
-
-        <!-- 数据库连接池 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-dbcp2</artifactId>
-            <version>2.7.0</version>
-        </dependency>
-
-        <!-- Junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
 
     <build>
         <plugins>
@@ -111,14 +43,14 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <path>/${project.artifactId}</path>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.tomcat.maven</groupId>-->
+<!--                <artifactId>tomcat7-maven-plugin</artifactId>-->
+<!--                <version>2.2</version>-->
+<!--                <configuration>-->
+<!--                    <path>/${project.artifactId}</path>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
         </plugins>
     </build>
