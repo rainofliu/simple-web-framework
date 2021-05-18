@@ -4,6 +4,7 @@ import org.geekbang.framework.annotation.Controller;
 import org.geekbang.framework.annotation.Service;
 import org.geekbang.framework.utils.ClassUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public final class ClassHelper {
     /**
      * 用于存放所加载的类
      */
-    private static final Set<Class<?>> CLASS_SET;
+    public static final Set<Class<?>> CLASS_SET;
 
     static {
         String appBasePackage = ConfigHelper.getAppBasePackage();
@@ -53,6 +54,36 @@ public final class ClassHelper {
         beanClassSet.addAll(controllerClassSet);
 
         return beanClassSet;
+    }
+
+    /**
+     * 获取某应用包下某父类（或接口）的所有子类（或实现类）
+     */
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass) {
+        Set<Class<?>> classSet = new HashSet<>();
+        // CLASS_SET:应用包下所有的类
+        for (Class<?> cls : CLASS_SET) {
+            // 判断子类或接口的实现类
+            if (superClass.isAssignableFrom(cls) && !superClass.equals(cls)) {
+                classSet.add(cls);
+            }
+        }
+
+        return classSet;
+    }
+
+    /**
+     * 获取应用包下带有某注解的所有类
+     */
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass) {
+        Set<Class<?>> classSet = new HashSet<>();
+        for (Class<?> cls : CLASS_SET) {
+            if (cls.isAnnotationPresent(annotationClass)) {
+                classSet.add(cls);
+            }
+        }
+
+        return classSet;
     }
 
 }
