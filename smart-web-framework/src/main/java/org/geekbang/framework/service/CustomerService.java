@@ -1,5 +1,6 @@
 package org.geekbang.framework.service;
 
+import org.geekbang.framework.annotation.Transaction;
 import org.geekbang.framework.helper.DatabaseHelper;
 import org.geekbang.framework.model.Customer;
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ public class CustomerService {
     /**
      * 获取客户列表
      */
+    @Transaction
     public List<Customer> getCustomerList() {
         // List<Customer> customerList = new ArrayList<>();
 
@@ -56,6 +58,7 @@ public class CustomerService {
     /**
      * 获取客户
      */
+    @Transaction
     public Customer getCustomer(Long id) {
 
         String sql = "SELECT * FROM customer where id=? ";
@@ -65,6 +68,7 @@ public class CustomerService {
     /**
      * 创建客户
      */
+    @Transaction
     public boolean createCustomer(Map<String, Object> fieldMap) {
         return DatabaseHelper.insertEntity(Customer.class, fieldMap);
     }
@@ -72,6 +76,7 @@ public class CustomerService {
     /**
      * 更新客户信息
      */
+    @Transaction
     public boolean updateCustomer(Long id, Map<String, Object> fieldMap) {
         return DatabaseHelper.updateEntity(Customer.class, id, fieldMap);
     }
@@ -79,6 +84,7 @@ public class CustomerService {
     /**
      * 删除客户
      */
+    @Transaction
     public boolean deleteCustomer(Long id) {
         return DatabaseHelper.deleteEntity(Customer.class, id);
     }

@@ -49,6 +49,7 @@ public abstract class AspectProxy implements Proxy {
 
         return result;
     }
+
     // 钩子方法
     public void begin() {
 

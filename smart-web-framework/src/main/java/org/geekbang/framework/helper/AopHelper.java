@@ -4,6 +4,7 @@ import org.geekbang.framework.annotation.Aspect;
 import org.geekbang.framework.proxy.AspectProxy;
 import org.geekbang.framework.proxy.Proxy;
 import org.geekbang.framework.proxy.ProxyManagement;
+import org.geekbang.framework.proxy.TransactionProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public final class AopHelper {
                 Object proxy = ProxyManagement.createProxy(targetClass, proxyList);
 
                 // 类似于Spring中注册 代理Bean
-                BeanHelper.setBean(targetClass,proxy);
+                BeanHelper.setBean(targetClass, proxy);
 
             }
 
@@ -73,7 +74,13 @@ public final class AopHelper {
      */
     private static Map<Class<?>, Set<Class<?>>> createProxyMap() throws Exception {
         Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<>();
+        addAspectProxy(proxyMap);
+        createTransactionProxy(proxyMap);
 
+        return proxyMap;
+    }
+
+    private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
         //AspectProxy的子类  Set    ControllerAspect
         Set<Class<?>> proxyClassSet = ClassHelper.getClassSetBySuper(AspectProxy.class);
 
@@ -90,8 +97,11 @@ public final class AopHelper {
                 proxyMap.put(proxyClass, targetClassSet);
             }
         }
+    }
 
-        return proxyMap;
+    private static void createTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) throws Exception {
+        Set<Class<?>> serviceClassSet = ClassHelper.getServiceClassSet();
+        proxyMap.put(TransactionProxy.class, serviceClassSet);
     }
 
     /**
