@@ -51,7 +51,7 @@ public class CustomerServiceTest {
         fieldMap.put("name", "ajin");
         fieldMap.put("contact", "ajin");
         fieldMap.put("telephone", "1888888888");
-        boolean result = customerService.createCustomer(fieldMap);
+        boolean result = customerService.createCustomer(fieldMap, fileParam);
         Assert.assertTrue(result);
     }
 

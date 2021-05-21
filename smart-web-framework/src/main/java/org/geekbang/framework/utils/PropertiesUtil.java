@@ -64,7 +64,7 @@ public final class PropertiesUtil {
         return getInt(properties, key, 0);
     }
 
-    private static int getInt(Properties properties, String key, int defaultValue) {
+    public static int getInt(Properties properties, String key, int defaultValue) {
         int value = defaultValue;
         if (properties.containsKey(key)) {
             value = CastUtil.castInt(properties.getProperty(key));

@@ -1,4 +1,4 @@
-package org.geekbang.framework.samples.service;
+package org.geekbang.framework.service;
 
 import org.geekbang.framework.annotation.Service;
 

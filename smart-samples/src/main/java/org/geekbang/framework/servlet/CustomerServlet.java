@@ -3,7 +3,6 @@ package org.geekbang.framework.servlet;
 import org.geekbang.framework.model.Customer;
 import org.geekbang.framework.service.CustomerService;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

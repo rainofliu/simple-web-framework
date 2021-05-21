@@ -1,8 +1,11 @@
 package org.geekbang.framework.service;
 
+import org.geekbang.framework.annotation.Service;
 import org.geekbang.framework.annotation.Transaction;
+import org.geekbang.framework.bean.FileParam;
 import org.geekbang.framework.helper.DatabaseHelper;
 import org.geekbang.framework.model.Customer;
+import org.geekbang.framework.helper.UploadHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +15,7 @@ import java.util.Map;
 /**
  * 客户服务
  */
+@Service
 public class CustomerService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
@@ -69,8 +73,13 @@ public class CustomerService {
      * 创建客户
      */
     @Transaction
-    public boolean createCustomer(Map<String, Object> fieldMap) {
-        return DatabaseHelper.insertEntity(Customer.class, fieldMap);
+    public boolean createCustomer(Map<String, Object> fieldMap, FileParam fileParam) {
+        boolean result = DatabaseHelper.insertEntity(Customer.class, fieldMap);
+        if (result){
+            // 上传文件
+            UploadHelper.uploadFile("/tmp/upload/",fileParam);
+        }
+        return result;
     }
 
     /**
